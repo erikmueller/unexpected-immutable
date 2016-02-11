@@ -1,7 +1,7 @@
 {
   "name": "unexpected-immutable",
   "version": "0.0.1",
-  "description": "Lets you assert equality of Immutable.js iterables",
+  "description": "Assert (pretty) equality of Immutable.js iterables with unexpected",
   "main": "lib/unexpected-immutable.js",
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js .",
@@ -12,15 +12,16 @@
     "url": "git+ssh://git@github.com/erikmueller/unexpected-immutable.git"
   },
   "keywords": [
-    "unexpected.js",
     "unexpected",
-    "immutable.js",
     "immutable",
-    "tdd",
     "test",
+    "assertion",
     "plugin"
   ],
-  "author": "erikmueller",
+  "author": {
+    "email": "e.mueller.mail@gmail.com",
+    "name": "Erik Mueller"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/erikmueller/unexpected-immutable/issues"
