@@ -4,8 +4,7 @@
   "description": "Assert (pretty) equality of Immutable.js iterables with unexpected",
   "main": "lib/unexpected-immutable.js",
   "scripts": {
-    "lint": "./node_modules/eslint/bin/eslint.js .",
-    "test": "node test/unexpected-immutable-test.js"
+    "test": "standard && node test/unexpected-immutable-test.js"
   },
   "repository": {
     "type": "git",
@@ -32,8 +31,8 @@
     "immutable": "^3.0.0"
   },
   "devDependencies": {
-    "eslint": "^1.10.3",
     "immutable": "^3.0.0",
+    "standard": "^8.6.0",
     "unexpected": "^10.0.0"
   }
 }
