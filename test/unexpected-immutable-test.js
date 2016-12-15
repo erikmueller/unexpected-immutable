@@ -32,7 +32,7 @@ test('Diff if nested not equal', () =>
   expect(() =>
     expect(new Immutable.List([new Immutable.Map({a: 1})]), 'to equal', new Immutable.List([new Immutable.Map({a: 2})])),
     'to error',
-    'expected List [ { a: 1 } ] to equal List [ { a: 2 } ]\n\n' +
+        'expected List [ Map ... ] to equal List [ Map ... ]\n\n' +
     '[\n' +
     '  {\n' +
     '    a: 1 // should equal 2\n' +
