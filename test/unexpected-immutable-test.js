@@ -1,6 +1,9 @@
-const Immutable = require('immutable')
-const test = require('./try')
-const expect = require('unexpected').clone().use(require('../lib/unexpected-immutable'))
+import test from 'ava'
+import unexpected from 'unexpected'
+import Immutable from 'immutable'
+import unexpectedImmutable from '../lib/unexpected-immutable'
+
+const expect = unexpected.clone().use(unexpectedImmutable)
 
 test('Equality of two Maps', () =>
   expect(new Immutable.Map({a: 1, b: 2}), 'to equal', new Immutable.Map({a: 1, b: 2})))
