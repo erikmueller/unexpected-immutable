@@ -4,6 +4,7 @@ import {List} from 'immutable'
 import unexpectedImmutable from '../lib/unexpected-immutable'
 
 const expect = unexpected.clone().use(unexpectedImmutable)
+expect.output.preferredWidth = 150
 
 test('<ImmutableIndexed> to have items [exhaustively] satisfying <any>, passing', () =>
   expect(

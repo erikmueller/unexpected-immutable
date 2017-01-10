@@ -4,6 +4,7 @@ import {Map} from 'immutable'
 import unexpectedImmutable from '../lib/unexpected-immutable'
 
 const expect = unexpected.clone().use(unexpectedImmutable)
+expect.output.preferredWidth = 150
 
 test('<ImmutableKeyed> to have values satisfying <any>, passing', () =>
   expect(

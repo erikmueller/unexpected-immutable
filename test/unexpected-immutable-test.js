@@ -4,6 +4,7 @@ import Immutable, {Map, List} from 'immutable'
 import unexpectedImmutable from '../lib/unexpected-immutable'
 
 const expect = unexpected.clone().use(unexpectedImmutable)
+expect.output.preferredWidth = 150
 
 test('Equality of two Maps', () =>
   expect(new Map({a: 1, b: 2}), 'to equal', new Map({a: 1, b: 2})))
