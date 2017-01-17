@@ -25,7 +25,7 @@ test('<ImmutableKeyed> to have values satisfying <any>, diff', () =>
         expect.it('to be a number')
       ),
     'to error',
-    'expected Map { a: 1, b: \'text\' }\nto have values satisfying expect.it(\'to be a number\')\n\n' +
+    'expected Map { a: 1, b: \'text\' } to have values satisfying expect.it(\'to be a number\')\n\n' +
     '{\n' +
     '  a: 1,\n' +
     '  b: \'text\' // should be a number\n' +
