@@ -165,3 +165,55 @@ test('<Immutable> to exhaustively satisfy <any>, diff', () =>
     '}'
   )
 )
+
+test('<Immutable> to have deep value <array>, passing', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have deep value',
+        ['a', 'b', 'c']
+      ),
+    'not to error'
+  )
+)
+
+test('<Immutable> to have deep value <array>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have deep value',
+        ['a', 'b', 'd']
+      ),
+    'to error',
+    'expected Map { a: Map ... } to have deep value [ \'a\', \'b\', \'d\' ]'
+  )
+)
+
+test('<Immutable> to have deep value <array> <any>, passing', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have deep value',
+        ['a', 'b', 'c'],
+        1
+      ),
+    'not to error'
+  )
+)
+
+test('<Immutable> to have deep value <array>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have deep value',
+        ['a', 'b', 'd'],
+        1
+      ),
+    'to error',
+    'expected Map { a: Map ... } to have deep value of 1 at [ \'a\', \'b\', \'d\' ]'
+  )
+)
