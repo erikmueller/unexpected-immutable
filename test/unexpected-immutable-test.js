@@ -166,6 +166,87 @@ test('<Immutable> to exhaustively satisfy <any>, diff', () =>
   )
 )
 
+test('<Immutable> extracting value at <array> <assertion>, pass', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'extracting value at',
+        ['a', 'b', 'c'],
+        'to be', 1
+      ),
+      'not to error'
+    )
+)
+
+test('<Immutable> extracting value at <array> <assertion>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'extracting value at',
+        ['a', 'b', 'd'],
+        'to be', 1
+      ),
+    'to error',
+    'expected Map { a: Map ... } extracting value at [ \'a\', \'b\', \'d\' ] to be 1'
+  )
+)
+
+test('<Immutable> extracting value at <string> <assertion>, period delimited, pass', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'extracting value at',
+        'a.b.c',
+        'to be', 1
+      ),
+      'not to error'
+    )
+)
+
+test('<Immutable> extracting value at <string> <assertion>, period delimited, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'extracting value at',
+        'a.b.d',
+        'to be', 1
+      ),
+    'to error',
+    'expected Map { a: Map ... } extracting value at \'a.b.d\' to be 1'
+  )
+)
+
+test('<Immutable> extracting value at <string> <assertion>, slash delimited, pass', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'extracting value at',
+        'a/b/c',
+        'to be', 1
+      ),
+      'not to error'
+    )
+)
+
+test('<Immutable> extracting value at <string> <assertion>, slash delimited, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'extracting value at',
+        'a/b/d',
+        'to be', 1
+      ),
+    'to error',
+    'expected Map { a: Map ... } extracting value at \'a/b/d\' to be 1'
+  )
+)
+
 test('<Immutable> to have deep value <array>, passing', () =>
   expect(
     () =>
@@ -204,7 +285,7 @@ test('<Immutable> to have deep value <array> <any>, passing', () =>
   )
 )
 
-test('<Immutable> to have deep value <array>, diff', () =>
+test('<Immutable> to have deep value <array> <any>, diff', () =>
   expect(
     () =>
       expect(
@@ -215,5 +296,57 @@ test('<Immutable> to have deep value <array>, diff', () =>
       ),
     'to error',
     'expected Map { a: Map ... } to have deep value of 1 at [ \'a\', \'b\', \'d\' ]'
+  )
+)
+
+test('<Immutable> to have deep value <string>, passing', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have deep value',
+        'a.b.c'
+      ),
+    'not to error'
+  )
+)
+
+test('<Immutable> to have deep value <string>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have deep value',
+        'a.b.d'
+      ),
+    'to error',
+    'expected Map { a: Map ... } to have deep value \'a.b.d\''
+  )
+)
+
+test('<Immutable> to have deep value <string> <any>, passing', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have deep value',
+        'a.b.c',
+        1
+      ),
+    'not to error'
+  )
+)
+
+test('<Immutable> to have deep value <string> <any>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have deep value',
+        'a.b.d',
+        1
+      ),
+    'to error',
+    'expected Map { a: Map ... } to have deep value of 1 at \'a.b.d\''
   )
 )
