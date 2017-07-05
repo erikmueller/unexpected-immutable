@@ -28,7 +28,7 @@ jobs:
           command: npm run build
       - deploy:
           name: Publish
-          command: ls -all . && cat .npmignore
+          command: npm publish
 
 workflows:
   version: 2
