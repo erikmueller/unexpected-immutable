@@ -165,3 +165,188 @@ test('<Immutable> to exhaustively satisfy <any>, diff', () =>
     '}'
   )
 )
+
+test('<Immutable> value at <array> <assertion>, pass', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'value at',
+        ['a', 'b', 'c'],
+        'to be', 1
+      ),
+      'not to error'
+    )
+)
+
+test('<Immutable> value at <array> <assertion>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'value at',
+        ['a', 'b', 'd'],
+        'to be', 1
+      ),
+    'to error',
+    'expected Map { a: Map ... } value at [ \'a\', \'b\', \'d\' ] to be 1'
+  )
+)
+
+test('<Immutable> value at <string> <assertion>, period delimited, pass', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'value at',
+        'a.b.c',
+        'to be', 1
+      ),
+      'not to error'
+    )
+)
+
+test('<Immutable> value at <string> <assertion>, period delimited, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'value at',
+        'a.b.d',
+        'to be', 1
+      ),
+    'to error',
+    'expected Map { a: Map ... } value at \'a.b.d\' to be 1'
+  )
+)
+
+test('<Immutable> value at <string> <assertion>, slash delimited, pass', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'value at',
+        'a/b/c',
+        'to be', 1
+      ),
+      'not to error'
+    )
+)
+
+test('<Immutable> value at <string> <assertion>, slash delimited, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'value at',
+        'a/b/d',
+        'to be', 1
+      ),
+    'to error',
+    'expected Map { a: Map ... } value at \'a/b/d\' to be 1'
+  )
+)
+
+test('<Immutable> to have value at <array>, passing', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have value at',
+        ['a', 'b', 'c']
+      ),
+    'not to error'
+  )
+)
+
+test('<Immutable> to have value at <array>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have value at',
+        ['a', 'b', 'd']
+      ),
+    'to error',
+    'expected Map { a: Map ... } to have value at [ \'a\', \'b\', \'d\' ]'
+  )
+)
+
+test('<Immutable> to have value at <array> <any>, passing', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have value at',
+        ['a', 'b', 'c'],
+        1
+      ),
+    'not to error'
+  )
+)
+
+test('<Immutable> to have value at <array> <any>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have value at',
+        ['a', 'b', 'd'],
+        1
+      ),
+    'to error',
+    'expected Map { a: Map ... } to have value at [ \'a\', \'b\', \'d\' ] of 1'
+  )
+)
+
+test('<Immutable> to have value at <string>, passing', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have value at',
+        'a.b.c'
+      ),
+    'not to error'
+  )
+)
+
+test('<Immutable> to have value at <string>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have value at',
+        'a.b.d'
+      ),
+    'to error',
+    'expected Map { a: Map ... } to have value at \'a.b.d\''
+  )
+)
+
+test('<Immutable> to have value at <string> <any>, passing', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have value at',
+        'a.b.c',
+        1
+      ),
+    'not to error'
+  )
+)
+
+test('<Immutable> to have value at <string> <any>, diff', () =>
+  expect(
+    () =>
+      expect(
+        new Map({ a: new Map({ b: new Map({ c: 1 }) }) }),
+        'to have value at',
+        'a.b.d',
+        1
+      ),
+    'to error',
+    'expected Map { a: Map ... } to have value at \'a.b.d\' of 1'
+  )
+)
