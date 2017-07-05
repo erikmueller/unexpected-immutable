@@ -24,19 +24,19 @@ Indexed types also have most of the assertions of `unexpected`s `array-like` dat
 
 **New assertions**
 
-The `to have deep value at <path>` assertion follows the given path (given either as an array of identifier strings, or as a period- or slash-separated string) to verify its presence. Another argument may be added to provide a value to check equality against. Examples:
+The `to have value at <path>` assertion follows the given path (given either as an array of identifier strings, or as a period- or slash-separated string) to verify its presence. Another argument may be added to provide a value to check equality against. Examples:
 
 ```js
 // Checks that there is a key at this location
-expect(collection, 'to have deep value at', ['start', 'user', 'ident']);
+expect(collection, 'to have value at', ['start', 'user', 'ident']);
 // Checks same location, verifies that value is 'myUser'
-expect(collection, 'to have deep value at', 'start/user/ident', 'myUser');
+expect(collection, 'to have value at', 'start/user/ident', 'myUser');
 ```
 
-The `extracting value at <path>` intermediate assertion will attempt to follow the given path into an Immutable collection, allowing further assertions on the value. If it does not exist, the assertion fails. Examples:
+The `value at <path>` intermediate assertion will attempt to follow the given path into an Immutable collection, allowing further assertions on the value. If it does not exist, the assertion fails. Examples:
 
 ```js
-expect(collection, 'extracting value at', ['start', 'user', 'ident'], 'to be ok');
-expect(collection, 'extracting value at', 'start/user/ident', 'to match', /User$/);
-expect(collection, 'extracting value at', 'start.user', 'to satisfy', { ident: 'myUser' });
+expect(collection, 'value at', ['start', 'user', 'ident'], 'to be ok');
+expect(collection, 'value at', 'start/user/ident', 'to match', /User$/);
+expect(collection, 'value at', 'start.user', 'to satisfy', { ident: 'myUser' });
 ```
