@@ -24,8 +24,11 @@ jobs:
           name: NPM login
           command: echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
       - deploy:
-          name: Build and Publish
-          command: npm publish
+          name: build
+          command: npm run build
+      - deploy:
+          name: Publish
+          command: ls -all . && cat .npmignore
 
 workflows:
   version: 2
