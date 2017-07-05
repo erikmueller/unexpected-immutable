@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: /root/unexpected-immutable
   docker:
-      - image: node:boron-alpine
+      - image: node:boron-slim
 
 version: 2
 jobs:
@@ -11,16 +11,23 @@ jobs:
       - checkout
       - run: npm install
       - run: npm test
+      - persist_to_workspace:
+          root: /root
+          path:
+            - unexpected-immutable
   deploy:
     <<: *defaults
-    requires:
-      - build_and_test
     steps:
+      - attach_workspace:
+          at: /root
       - deploy:
           name: NPM login
           command: echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
       - deploy:
-          name: Build and Publish
+          name: build
+          command: npm run build
+      - deploy:
+          name: Publish
           command: npm publish
 
 workflows:
@@ -29,6 +36,8 @@ workflows:
     jobs:
       - build_and_test
       - deploy:
+          requires:
+            - build_and_test
           filters:
             branches:
               only: master

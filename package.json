@@ -1,12 +1,11 @@
 {
   "name": "unexpected-immutable",
-  "version": "0.1.0",
+  "version": "0.2.5",
   "description": "Assert (pretty) equality of Immutable.js iterables with unexpected",
   "main": "build/unexpected-immutable.js",
   "scripts": {
     "build": "rm -rf build/ && NODE_ENV=production rollup -c",
-    "test": "standard | snazzy && jest",
-    "prebublish": "npm run build"
+    "test": "standard | snazzy && jest"
   },
   "repository": {
     "type": "git",
@@ -54,6 +53,7 @@
   "jest": {
     "setupFiles": [
       "<rootDir>/test_setup.js"
-    ]
+    ],
+    "cacheDirectory": "<rootDir>/.cache"
   }
 }
