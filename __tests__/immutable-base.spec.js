@@ -1,304 +1,304 @@
 import expect from 'unexpected'
 import Immutable, { Map, List } from 'immutable'
 
-test('Equality of two Maps', () =>
-  expect(Map({ a: 1, b: 2 }), 'to equal', Map({ a: 1, b: 2 })))
+describe('to equal', function () {
+  test('expect <Iterable> to equal <Iterable>', function () {
+    expect(
+      Immutable.fromJS([{ a: 1 }]),
+      'to equal',
+      Immutable.fromJS([{ a: 1 }])
+    )
+  })
 
-test('Equality of nested iterables', () =>
-  expect(
-    Immutable.fromJS([{ a: 1 }]),
-    'to equal',
-    Immutable.fromJS([{ a: 1 }])
-  ))
+  test('expect error for <Iterable> to equal <Iterable>', () =>
+    expect(
+      () =>
+        expect(
+          Immutable.fromJS([{ a: 1 }]),
+          'to equal',
+          Immutable.fromJS([{ a: 2 }])
+        ),
+      'to error',
+      'expected List [ Map ... ] to equal List [ Map ... ]\n\n' +
+        '[\n' +
+        '  {\n' +
+        '    a: 1 // should equal 2\n' +
+        '  }\n' +
+        ']'
+    )
+  )
 
-test('Constructor mismatch', () =>
-  expect(
-    () => expect(List([1, 2, 3]), 'to equal', Map({ a: 1, b: 2, c: 3 })),
-    'to error',
-    'expected List [ 1, 2, 3 ] to equal Map { a: 1, b: 2, c: 3 }\n\nMismatching constructors Array should be Object'
-  ))
+  test('expect error for <List> to equal <Map>', function () {
+    expect(
+      () =>
+        expect(
+          List([1, 2, 3]), 'to equal', Map({ a: 1, b: 2, c: 3 })),
+          'to error',
+          'expected List [ 1, 2, 3 ] to equal Map { a: 1, b: 2, c: 3 }\n\nMismatching constructors Array should be Object'
+    )
+  })
+})
 
-test('Diff if not equal', () =>
-  expect(
-    () => expect(List([1, 2, 3]), 'to equal', List([1, 2, 4])),
-    'to error',
-    'expected List [ 1, 2, 3 ] to equal List [ 1, 2, 4 ]\n\n' +
-      '[\n' +
-      '  1,\n  2,\n  3 // should equal 4\n' +
-      ']'
-  ))
+describe('to satisfy', function () {
+  test('expect <Immutable> to satisfy <any>', () =>
+    expect(Map({ a: 1, b: 2 }), 'to satisfy', { a: 1 })
+  )
 
-test('Diff if nested not equal', () =>
-  expect(
-    () =>
-      expect(
-        Immutable.fromJS([{ a: 1 }]),
-        'to equal',
-        Immutable.fromJS([{ a: 2 }])
-      ),
-    'to error',
-    'expected List [ Map ... ] to equal List [ Map ... ]\n\n' +
-      '[\n' +
-      '  {\n' +
-      '    a: 1 // should equal 2\n' +
-      '  }\n' +
-      ']'
-  ))
+  test('expect error for <Immutable> to satisfy <any>', () =>
+    expect(
+      () => expect(Map({ a: 1, b: 2 }), 'to satisfy', { a: 2 }),
+      'to error',
+      'expected Map { a: 1, b: 2 } to satisfy { a: 2 }\n\n' +
+        '{\n' +
+        '  a: 1, // should equal 2\n' +
+        '  b: 2\n' +
+        '}'
+    )
+  )
 
-test('<Immutable> to satisfy <any>, passing', () =>
-  expect(
-    () => expect(Map({ a: 1, b: 2 }), 'to satisfy', Map({ a: 1 })),
-    'not to error'
-  ))
+  test('expect <Immutable> to satisfy <Immutable>', () =>
+    expect(Map({ a: 1, b: 2 }), 'to satisfy', Map({ a: 1 }))
+  )
 
-test('<Immutable> to satisfy <Immutable>, diff', () =>
-  expect(
-    () => expect(Map({ a: 1, b: 2 }), 'to satisfy', Map({ a: 2 })),
-    'to error',
-    'expected Map { a: 1, b: 2 } to satisfy Map { a: 2 }\n\n' +
-      '{\n' +
-      '  a: 1, // should equal 2\n' +
-      '  b: 2\n' +
-      '}'
-  ))
+  test('expect error for <Immutable> to satisfy <Immutable>', () =>
+    expect(
+      () =>
+        expect(Map({ a: 1, b: 2 }), 'to satisfy', Map({ a: 2 })),
+        'to error',
+        'expected Map { a: 1, b: 2 } to satisfy Map { a: 2 }\n\n' +
+          '{\n' +
+          '  a: 1, // should equal 2\n' +
+          '  b: 2\n' +
+          '}'
+      )
+  )
+})
 
-test('<Immutable> to exhaustively satisfy <Immutable>, passing', () =>
-  expect(
-    () =>
-      expect(
-        Map({ a: 1, b: 2 }),
-        'to exhaustively satisfy',
-        Map({ a: 1, b: 2 })
-      ),
-    'not to error'
-  ))
+describe('to exhaustively satisfy', function () {
+  test('expect <Immutable> to exhaustively satisfy <any>', () =>
+    expect(Map({ a: 1, b: 2 }), 'to exhaustively satisfy', { a: 1, b: 2 })
+  )
 
-test('<Immutable> to exhaustively satisfy <Immutable>, diff', () =>
-  expect(
-    () => expect(Map({ a: 1, b: 2 }), 'to exhaustively satisfy', Map({ a: 1 })),
-    'to error',
-    'expected Map { a: 1, b: 2 } to exhaustively satisfy Map { a: 1 }\n\n' +
-      '{\n' +
-      '  a: 1,\n' +
-      '  b: 2 // should be removed\n' +
-      '}'
-  ))
+  test('expect error for <Immutable> to exhaustively satisfy <any>', () =>
+    expect(
+      () => expect(Map({ a: 1, b: 2 }), 'to exhaustively satisfy', { a: 1 }),
+      'to error',
+      'expected Map { a: 1, b: 2 } to exhaustively satisfy { a: 1 }\n\n' +
+        '{\n' +
+        '  a: 1,\n' +
+        '  b: 2 // should be removed\n' +
+        '}'
+    )
+  )
 
-test('<Immutable> to satisfy <any>, passing', () =>
-  expect(
-    () => expect(Map({ a: 1, b: 2 }), 'to satisfy', { a: 1 }),
-    'not to error'
-  ))
+  test('expect <Immutable> to exhaustively satisfy <Immutable>', () =>
+    expect(Map({ a: 1, b: 2 }), 'to exhaustively satisfy', Map({ a: 1, b: 2 }))
+  )
 
-test('<Immutable> to satisfy <any>, diff', () =>
-  expect(
-    () => expect(Map({ a: 1, b: 2 }), 'to satisfy', { a: 2 }),
-    'to error',
-    'expected Map { a: 1, b: 2 } to satisfy { a: 2 }\n\n' +
-      '{\n' +
-      '  a: 1, // should equal 2\n' +
-      '  b: 2\n' +
-      '}'
-  ))
+  test('expect error for <Immutable> to exhaustively satisfy <Immutable>', () =>
+    expect(
+      () =>
+        expect(Map({ a: 1, b: 2 }), 'to exhaustively satisfy', Map({ a: 1 })),
+        'to error',
+        'expected Map { a: 1, b: 2 } to exhaustively satisfy Map { a: 1 }\n\n' +
+          '{\n' +
+          '  a: 1,\n' +
+          '  b: 2 // should be removed\n' +
+          '}'
+      )
+  )
+})
 
-test('<Immutable> to exhaustively satisfy <any>, passing', () =>
-  expect(
-    () =>
-      expect(Map({ a: 1, b: 2 }), 'to exhaustively satisfy', { a: 1, b: 2 }),
-    'not to error'
-  ))
-
-test('<Immutable> to exhaustively satisfy <any>, diff', () =>
-  expect(
-    () => expect(Map({ a: 1, b: 2 }), 'to exhaustively satisfy', { a: 1 }),
-    'to error',
-    'expected Map { a: 1, b: 2 } to exhaustively satisfy { a: 1 }\n\n' +
-      '{\n' +
-      '  a: 1,\n' +
-      '  b: 2 // should be removed\n' +
-      '}'
-  ))
-
-test('<Immutable> value at <array> <assertion>, pass', () =>
-  expect(
-    () =>
+describe('value at', function () {
+  describe('<array> <assertion>', function () {
+    test('expect <Immutable> value at <array> <assertion>', () =>
       expect(
         Map({ a: Map({ b: Map({ c: 1 }) }) }),
         'value at',
         ['a', 'b', 'c'],
         'to be',
         1
-      ),
-    'not to error'
-  ))
+      )
+    )
 
-test('<Immutable> value at <array> <assertion>, diff', () =>
-  expect(
-    () =>
+    test('expect error for <Immutable> value at <array> <assertion>', () =>
       expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'value at',
-        ['a', 'b', 'd'],
-        'to be',
-        1
-      ),
-    'to error',
-    'expected Map { a: Map ... } value at [ \'a\', \'b\', \'d\' ] to be 1'
+        () =>
+          expect(
+            Map({ a: Map({ b: Map({ c: 1 }) }) }),
+            'value at',
+            ['a', 'b', 'd'],
+            'to be',
+            1
+          ),
+        'to error',
+        'expected Map { a: Map ... } value at [ \'a\', \'b\', \'d\' ] to be 1'
+      )
+    )
+  })
+
+  describe('<string> <assertion>', function () {
+    describe('period delimited', function () {
+      test('expect <Immutable> value at <string> <assertion>', () =>
+        expect(
+          Map({ a: Map({ b: Map({ c: 1 }) }) }),
+          'value at',
+          'a.b.c',
+          'to be',
+          1
+        )
+      )
+
+      test('expect error for <Immutable> value at <string> <assertion>', () =>
+        expect(
+          () =>
+            expect(
+              Map({ a: Map({ b: Map({ c: 1 }) }) }),
+              'value at',
+              'a.b.d',
+              'to be',
+              1
+            ),
+          'to error',
+          'expected Map { a: Map ... } value at \'a.b.d\' to be 1'
+        )
+      )
+    })
+
+    describe('slash delimited', function () {
+      test('expect <Immutable> value at <string> <assertion>', () =>
+        expect(
+          Map({ a: Map({ b: Map({ c: 1 }) }) }),
+          'value at',
+          'a/b/c',
+          'to be',
+          1
+        )
+      )
+
+      test('expect error for <Immutable> value at <string> <assertion>', () =>
+        expect(
+          () =>
+            expect(
+              Map({ a: Map({ b: Map({ c: 1 }) }) }),
+              'value at',
+              'a/b/d',
+              'to be',
+              1
+            ),
+          'to error',
+          'expected Map { a: Map ... } value at \'a/b/d\' to be 1'
+        )
+      )
+    })
+  })
+})
+
+describe('[not] to have value at', function () {
+  test('expect <Immutable> not to have value at <string|array>', () =>
+    expect(
+      Map({ a: Map({ b: Map({ c: 1 }) }) }),
+      'not to have value at',
+      'a.b.c.d'
+    )
   )
-)
 
-test('<Immutable> value at <string> <assertion>, period delimited, pass', () =>
-  expect(
-    () =>
-      expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'value at',
-        'a.b.c',
-        'to be',
-        1
-      ),
-    'not to error'
-  ))
-
-test('<Immutable> value at <string> <assertion>, period delimited, diff', () =>
-  expect(
-    () =>
-      expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'value at',
-        'a.b.d',
-        'to be',
-        1
-      ),
-    'to error',
-    'expected Map { a: Map ... } value at \'a.b.d\' to be 1'
-  )
-)
-
-test('<Immutable> value at <string> <assertion>, slash delimited, pass', () =>
-  expect(
-    () =>
-      expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'value at',
-        'a/b/c',
-        'to be',
-        1
-      ),
-    'not to error'
-  ))
-
-test('<Immutable> value at <string> <assertion>, slash delimited, diff', () =>
-  expect(
-    () =>
-      expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'value at',
-        'a/b/d',
-        'to be',
-        1
-      ),
-    'to error',
-    'expected Map { a: Map ... } value at \'a/b/d\' to be 1'
-  )
-)
-
-test('<Immutable> to have value at <array>, passing', () =>
-  expect(
-    () =>
-      expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'to have value at',
-        ['a', 'b', 'c']
-      ),
-    'not to error'
-  ))
-
-test('<Immutable> to have value at <array>, diff', () =>
-  expect(
-    () =>
-      expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'to have value at',
-        ['a', 'b', 'd']
-      ),
-    'to error',
-    'expected Map { a: Map ... } to have value at [ \'a\', \'b\', \'d\' ]'
-  )
-)
-
-test('<Immutable> to have value at <array> <any>, passing', () =>
-  expect(
-    () =>
-      expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'to have value at',
-        ['a', 'b', 'c'],
-        1
-      ),
-    'not to error'
-  ))
-
-test('<Immutable> to have value at <array> <any>, diff', () =>
-  expect(
-    () =>
-      expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'to have value at',
-        ['a', 'b', 'd'],
-        1
-      ),
-    'to error',
-    'expected Map { a: Map ... } to have value at [ \'a\', \'b\', \'d\' ] of 1'
-  )
-)
-
-test('<Immutable> to have value at <string>, passing', () =>
-  expect(
-    () =>
+  describe('<string>', function () {
+    test('expect <Immutable> to have value at <string>', () =>
       expect(
         Map({ a: Map({ b: Map({ c: 1 }) }) }),
         'to have value at',
         'a.b.c'
-      ),
-    'not to error'
-  ))
+      )
+    )
 
-test('<Immutable> to have value at <string>, diff', () =>
-  expect(
-    () =>
+    test('expect error for <Immutable> to have value at <string>', () =>
+      expect(
+        () =>
+          expect(
+            Map({ a: Map({ b: Map({ c: 1 }) }) }),
+            'to have value at',
+            'a.b.d'
+          ),
+        'to error',
+        'expected Map { a: Map ... } to have value at \'a.b.d\''
+      )
+    )
+  })
+
+  describe('<string> <any>', function () {
+    test('expect <Immutable> to have value at <string> <any>', () =>
+      expect(
+        () =>
+          expect(
+            Map({ a: Map({ b: Map({ c: 1 }) }) }),
+            'to have value at',
+            'a.b.c',
+            1
+          ),
+        'not to error'
+      ))
+
+    test('expect error for <Immutable> to have value at <string> <any>', () =>
+      expect(
+        () =>
+          expect(
+            Map({ a: Map({ b: Map({ c: 1 }) }) }),
+            'to have value at',
+            'a.b.d',
+            1
+          ),
+        'to error',
+        'expected Map { a: Map ... } to have value at \'a.b.d\' of 1'
+      )
+    )
+  })
+
+  describe('<array>', function () {
+    test('expect <Immutable> to have value at <array>', () =>
       expect(
         Map({ a: Map({ b: Map({ c: 1 }) }) }),
         'to have value at',
-        'a.b.d'
-      ),
-    'to error',
-    'expected Map { a: Map ... } to have value at \'a.b.d\''
-  )
-)
+        ['a', 'b', 'c']
+      )
+    )
 
-test('<Immutable> to have value at <string> <any>, passing', () =>
-  expect(
-    () =>
+    test('expect error for <Immutable> to have value at <array>', () =>
+      expect(
+        () =>
+          expect(
+            Map({ a: Map({ b: Map({ c: 1 }) }) }),
+            'to have value at',
+            ['a', 'b', 'd']
+          ),
+        'to error',
+        'expected Map { a: Map ... } to have value at [ \'a\', \'b\', \'d\' ]'
+      )
+    )
+  })
+
+  describe('<array> <any>', function () {
+    test('expect <Immutable> to have value at <array> <any>', () =>
       expect(
         Map({ a: Map({ b: Map({ c: 1 }) }) }),
         'to have value at',
-        'a.b.c',
+        ['a', 'b', 'c'],
         1
-      ),
-    'not to error'
-  ))
+      )
+    )
 
-test('<Immutable> to have value at <string> <any>, diff', () =>
-  expect(
-    () =>
+    test('expect error for <Immutable> to have value at <array> <any>', () =>
       expect(
-        Map({ a: Map({ b: Map({ c: 1 }) }) }),
-        'to have value at',
-        'a.b.d',
-        1
-      ),
-    'to error',
-    'expected Map { a: Map ... } to have value at \'a.b.d\' of 1'
-  )
-)
+        () =>
+          expect(
+            Map({ a: Map({ b: Map({ c: 1 }) }) }),
+            'to have value at',
+            ['a', 'b', 'd'],
+            1
+          ),
+        'to error',
+        'expected Map { a: Map ... } to have value at [ \'a\', \'b\', \'d\' ] of 1'
+      )
+    )
+  })
+})

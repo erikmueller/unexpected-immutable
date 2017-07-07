@@ -54,6 +54,13 @@
     "setupFiles": [
       "<rootDir>/test_setup.js"
     ],
-    "cacheDirectory": "<rootDir>/.cache"
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/coverage",
+    "cacheDirectory": "<rootDir>/.cache",
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text-summary"
+    ]
   }
 }
