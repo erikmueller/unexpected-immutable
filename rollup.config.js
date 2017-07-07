@@ -8,6 +8,6 @@ export default {
       exclude: 'node_modules/**'
     })
   ],
-  dest: 'build/unexpected-immytable.js',
+  dest: 'build/unexpected-immutable.js',
   external: ['immutable']
 }
