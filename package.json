@@ -40,11 +40,16 @@
     "babel-plugin-transform-es2015-spread": "^6.22.0",
     "immutable": "^3.0.0",
     "jest": "^20.0.4",
+    "jest-matchers": "^20.0.3",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-test-renderer": "^16.3.2",
     "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1",
     "snazzy": "^7.0.0",
     "standard": "^10.0.2",
-    "unexpected": "^10.0.0"
+    "unexpected": "^10.0.0",
+    "unexpected-react": "^5.0.1"
   },
   "standard": {
     "env": "jest",
