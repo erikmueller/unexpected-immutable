@@ -25,10 +25,10 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: /~
+          at: ~/
       - deploy:
-          name: NPM login
-          command: echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
+          name: Authenticate with npm
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/unexpected-immutable/.npmrc
       - deploy:
           name: build
           command: npm run build
