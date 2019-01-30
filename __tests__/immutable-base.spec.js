@@ -302,3 +302,26 @@ test('<Immutable> to have value at <string> <any>, diff', () =>
     'expected Map { a: Map ... } to have value at \'a.b.d\' of 1'
   )
 )
+
+test('<Immutable> to be empty, passing', () =>
+  expect(
+    () =>
+      expect(
+        Map(),
+        'to be empty'
+      ),
+    'not to error'
+  )
+)
+
+test('<Immutable> to be empty, diff', () =>
+  expect(
+    () =>
+      expect(
+        Map({ a: 1 }),
+        'to be empty'
+      ),
+    'to error',
+    'expected Map { a: 1 } to be empty'
+  )
+)
