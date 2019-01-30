@@ -17,33 +17,9 @@ jobs:
           paths:
               - node_modules
       - run: npm test
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - unexpected-immutable
-  deploy:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/
-      - deploy:
-          name: Authenticate with npm
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/unexpected-immutable/.npmrc
-      - deploy:
-          name: build
-          command: npm run build
-      - deploy:
-          name: Publish
-          command: npm publish
 
 workflows:
   version: 2
-  build_test_and_deploy:
+  build_test:
     jobs:
       - build_and_test
-      - deploy:
-          requires:
-            - build_and_test
-          filters:
-            branches:
-              only: master
