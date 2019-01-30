@@ -1,7 +1,7 @@
 defaults: &defaults
-  working_directory: /root/unexpected-immutable
+  working_directory: ~/unexpected-immutable
   docker:
-      - image: node:boron-slim
+      - image: node:dubnium
 
 version: 2
 jobs:
@@ -9,17 +9,23 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: npm install
+      - restore_cache:
+          key: v1-{{ checksum "package-lock.json" }}
+      - run: npm ci
+      - save_cache:
+          key: v1-{{ checksum "package-lock.json" }}
+          paths:
+              - node_modules
       - run: npm test
       - persist_to_workspace:
-          root: /root
-          path:
+          root: ~/
+          paths:
             - unexpected-immutable
   deploy:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: /root
+          at: /~
       - deploy:
           name: NPM login
           command: echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
