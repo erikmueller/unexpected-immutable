@@ -44,7 +44,7 @@
     "rollup-plugin-babel": "^2.7.1",
     "snazzy": "^7.0.0",
     "standard": "^10.0.2",
-    "unexpected": "^10.0.0"
+    "unexpected": "^11.0.1"
   },
   "standard": {
     "env": "jest",
