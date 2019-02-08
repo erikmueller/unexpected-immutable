@@ -51,9 +51,6 @@
     "ignore": "build"
   },
   "jest": {
-    "setupFiles": [
-      "<rootDir>/test_setup.js"
-    ],
     "cacheDirectory": "<rootDir>/.cache"
   }
 }

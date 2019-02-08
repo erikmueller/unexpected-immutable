@@ -1,4 +1,4 @@
-import expect from 'unexpected'
+import expect from '../expect'
 import Immutable, { Map, List } from 'immutable'
 
 test('Equality of two Maps', () =>

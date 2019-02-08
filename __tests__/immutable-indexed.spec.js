@@ -1,4 +1,4 @@
-import expect from 'unexpected'
+import expect from '../expect'
 import { List } from 'immutable'
 
 test('<ImmutableIndexed> to have items [exhaustively] satisfying <any>, passing', () =>
