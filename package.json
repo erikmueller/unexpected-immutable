@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/erikmueller/unexpected-immutable#readme",
   "peerDependencies": {
-    "unexpected": "^10.0.0",
+    "unexpected": "^10.0.0 || ^11.0.0",
     "immutable": "^3.0.0"
   },
   "devDependencies": {
