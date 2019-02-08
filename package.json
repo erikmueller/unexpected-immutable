@@ -1,6 +1,6 @@
 {
   "name": "unexpected-immutable",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Assert (pretty) equality of Immutable.js iterables with unexpected",
   "main": "build/unexpected-immutable.js",
   "scripts": {
