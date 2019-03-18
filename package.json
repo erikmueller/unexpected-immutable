@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/erikmueller/unexpected-immutable#readme",
   "peerDependencies": {
-    "unexpected": "^10.0.0",
+    "unexpected": "^10.0.0 || ^11.0.0",
     "immutable": "^3.0.0"
   },
   "devDependencies": {
@@ -45,16 +45,13 @@
     "rollup-plugin-babel": "^2.7.1",
     "snazzy": "^7.0.0",
     "standard": "^10.0.2",
-    "unexpected": "^10.0.0"
+    "unexpected": "^11.0.1"
   },
   "standard": {
     "env": "jest",
     "ignore": "build"
   },
   "jest": {
-    "setupFiles": [
-      "<rootDir>/test_setup.js"
-    ],
     "cacheDirectory": "<rootDir>/.cache"
   }
 }

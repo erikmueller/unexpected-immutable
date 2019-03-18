@@ -1,4 +1,4 @@
-import expect from 'unexpected'
+import expect from '../expect'
 import { Map } from 'immutable'
 
 test('<ImmutableKeyed> to have values satisfying <any>, passing', () =>
